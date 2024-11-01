@@ -42,24 +42,24 @@ def imprimir_matriz(matriz, pos_atual):
 
 def mover(matriz, pos, direcoes_fixas, tentativa_num):
     i, j = pos
-    dado = matriz[i][j] #dadao atual current focus
+    dado = matriz[i][j] #dadao atual current focus, ou seja, 1, 2, 3,4 5 ou 6
 
-    if (i == 0 and j == 7):
+    if (i == 0 and j == 7): #ve se chegou ao destino
         print(f"Caminho encontrado ao (0, 7)!")
         return True
 
     imprimir_matriz(matriz, pos)
     time.sleep(1)
 
-    if dado in direcoes_fixas: #se od ados existir
-        direcao = direcoes_fixas[dado] # a direção é a chave dado, nesse primeior caso que vale o valor na posiçao (0, 7), que é 1
-        di, dj = movimentos[direcao] #(-1, 0)
-        novo_i = i + di * dado
+    if dado in direcoes_fixas: #se dados existir nas direções
+        direcao = direcoes_fixas[dado] # a direção é a chave dado, nesse primeiro caso que vale o valor na posiçao (0, 7), que é 1
+        di, dj = movimentos[direcao] # di recebe o primeiro valor de (-1, 0) que é -1 e di recebe o segundo valor de (-1, 0) o  0 
+        novo_i = i + di * dado #muda a posição
         novo_j = j + dj * dado
 
         if 0 <= novo_i < 8 and 0 <= novo_j < 8:
             print(f"Tentativa {tentativa_num}: Mover de ({i}, {j}) para ({novo_i}, {novo_j}) com dado {dado} na direção '{direcao}'")
-            if mover(matriz, (novo_i, novo_j), direcoes_fixas, tentativa_num):
+            if mover(matriz, (novo_i, novo_j), direcoes_fixas, tentativa_num): #recursividade
                 return True
         else:
             print(f"Tentativa de mover de ({i}, {j}) para fora da matriz em ({novo_i}, {novo_j})")
